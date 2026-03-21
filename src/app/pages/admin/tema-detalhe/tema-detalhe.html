@@ -59,11 +59,13 @@
       </div>
     }
 
-    @for (p of perguntas(); track p.id) {
-      <div class="pergunta-card">
-        <p>{{ p.conteudo }}</p>
-        <small><i class="pi pi-clock"></i> {{ p.criadoEm | relativeTime }}</small>
-      </div>
-    }
+    <div class="perguntas-list">
+      @for (p of perguntas(); track p.id) {
+        <div class="pergunta-card">
+          <p>{{ p.conteudo }}</p>
+          <small><i class="pi pi-clock"></i> {{ p.criadoEm | relativeTime }}</small>
+        </div>
+      }
+    </div>
   }
 </div>

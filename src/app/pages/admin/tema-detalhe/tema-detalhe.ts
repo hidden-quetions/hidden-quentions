@@ -16,6 +16,7 @@ import { TagModule } from 'primeng/tag';
       max-width: 900px;
       margin: 0 auto;
       padding: 32px 24px;
+      animation: hqFadeIn 0.35s ease both;
     }
     .back-link {
       color: #6b7280;
@@ -27,14 +28,17 @@ import { TagModule } from 'primeng/tag';
       margin-bottom: 24px;
       cursor: pointer;
       padding: 4px 0;
+      transition: color 0.2s, transform 0.2s;
+      animation: hqFadeInUp 0.4s ease 0.05s both;
     }
-    .back-link:hover { color: #374151; }
+    .back-link:hover { color: #374151; transform: translateX(-3px); }
     .tema-header {
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
       padding: 24px;
       margin-bottom: 24px;
+      animation: hqFadeInUp 0.4s ease 0.1s both;
     }
     .tema-header-top {
       display: flex;
@@ -86,12 +90,19 @@ import { TagModule } from 'primeng/tag';
       color: #111827;
       margin-bottom: 16px;
     }
+    .perguntas-title { animation: hqFadeInUp 0.4s ease 0.18s both; }
+    .perguntas-list { animation: hqFadeInUp 0.4s ease 0.24s both; }
     .pergunta-card {
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 10px;
       padding: 16px 20px;
       margin-bottom: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pergunta-card:hover {
+      border-color: #c7d2fe;
+      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.08);
     }
     .pergunta-card p {
       color: #374151;
