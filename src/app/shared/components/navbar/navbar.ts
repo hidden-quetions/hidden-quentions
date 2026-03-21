@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -16,6 +16,12 @@ import { TooltipModule } from 'primeng/tooltip';
       border-bottom: 1px solid #e5e7eb;
       padding: 8px 24px;
       border-radius: 0;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+      animation: hqFadeIn 0.3s ease both;
+    }
+    :host ::ng-deep .app-toolbar.scrolled {
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+      border-bottom-color: transparent;
     }
     .brand {
       font-size: 18px;
@@ -23,10 +29,9 @@ import { TooltipModule } from 'primeng/tooltip';
       color: #111827;
       letter-spacing: -0.5px;
       text-decoration: none;
+      transition: color 0.2s, opacity 0.2s;
     }
-    .brand:hover {
-      color: #111827;
-    }
+    .brand:hover { opacity: 0.75; }
     .admin-greeting {
       font-size: 13px;
       color: #6b7280;
@@ -48,6 +53,8 @@ import { TooltipModule } from 'primeng/tooltip';
   `
 })
 export class NavbarComponent {
+  scrolled = signal(false);
+
   get admin() {
     return this.authService.getAdmin();
   }
@@ -56,6 +63,11 @@ export class NavbarComponent {
     private authService: AuthService,
     private router: Router
   ) {}
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.scrolled.set(window.scrollY > 8);
+  }
 
   logout() {
     this.authService.logout();
