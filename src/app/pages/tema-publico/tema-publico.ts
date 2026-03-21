@@ -19,14 +19,17 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       min-height: 100vh;
       min-height: 100dvh;
       padding: 40px 16px;
+      background: #f5f6ff;
     }
     .public-card {
       width: 100%;
       max-width: 480px;
       background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
+      border: 1px solid rgba(99, 102, 241, 0.14);
+      border-radius: 20px;
       padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05);
+      animation: hqCardIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both;
     }
     .public-card h2 {
       font-size: 22px;
@@ -52,11 +55,14 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     .public-success {
       text-align: center;
       padding: 20px 0;
+      animation: hqFadeInUp 0.4s ease both;
     }
     .public-success i {
       font-size: 48px;
       color: #22c55e;
       margin-bottom: 16px;
+      display: block;
+      animation: hqBounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
     }
     .public-success h3 {
       font-size: 20px;
