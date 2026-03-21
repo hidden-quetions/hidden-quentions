@@ -18,6 +18,7 @@ import { MessageModule } from 'primeng/message';
       max-width: 600px;
       margin: 0 auto;
       padding: 32px 24px;
+      animation: hqFadeIn 0.35s ease both;
     }
     .back-link {
       color: #6b7280;
@@ -29,15 +30,22 @@ import { MessageModule } from 'primeng/message';
       margin-bottom: 24px;
       cursor: pointer;
       padding: 4px 0;
+      transition: color 0.2s, transform 0.2s;
+      animation: hqFadeInUp 0.4s ease 0.05s both;
     }
-    .back-link:hover { color: #374151; }
+    .back-link:hover { color: #374151; transform: translateX(-3px); }
     .config-card {
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
       padding: 24px;
       margin-bottom: 16px;
+      animation: hqFadeInUp 0.4s ease both;
+      transition: box-shadow 0.2s;
     }
+    .config-card:hover { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); }
+    .config-card:nth-child(2) { animation-delay: 0.1s; }
+    .config-card:nth-child(3) { animation-delay: 0.18s; }
     .config-card h3 {
       font-size: 16px;
       font-weight: 600;
