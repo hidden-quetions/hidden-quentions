@@ -36,24 +36,28 @@
     </div>
   }
 
-  @for (tema of temas(); track tema.id) {
-    <a [routerLink]="['/admin/tema', tema.id]" class="tema-card">
-      <div class="tema-info">
-        <h3>{{ tema.titulo }}</h3>
-        @if (tema.descricao) {
-          <p>{{ tema.descricao }}</p>
-        }
-      </div>
-      <div class="tema-meta">
-        <p-tag [value]="tema.ativo ? 'ATIVO' : 'DESATIVADO'" [severity]="tema.ativo ? 'success' : 'secondary'" />
-        <i class="pi pi-chevron-right icon-muted"></i>
-      </div>
-    </a>
-  }
+  <div class="temas-list">
+    @for (tema of temas(); track tema.id) {
+      <a [routerLink]="['/admin/tema', tema.id]" class="tema-card">
+        <div class="tema-info">
+          <h3>{{ tema.titulo }}</h3>
+          @if (tema.descricao) {
+            <p>{{ tema.descricao }}</p>
+          }
+        </div>
+        <div class="tema-meta">
+          <p-tag [value]="tema.ativo ? 'ATIVO' : 'DESATIVADO'" [severity]="tema.ativo ? 'success' : 'secondary'" />
+          <i class="pi pi-chevron-right icon-muted"></i>
+        </div>
+      </a>
+    }
+  </div>
 </div>
 
 <!-- FAB mobile -->
-<p-button icon="pi pi-plus" [rounded]="true" styleClass="fab" (click)="abrirModal()" pTooltip="Novo Tema" />
+<div class="fab">
+  <p-button icon="pi pi-plus" [rounded]="true" (click)="abrirModal()" pTooltip="Novo Tema" />
+</div>
 
 <!-- Modal Novo Tema -->
 <p-dialog header="Novo Tema" [(visible)]="modalVisivel" [modal]="true" styleClass="dialog-md">

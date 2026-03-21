@@ -23,6 +23,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       max-width: 900px;
       margin: 0 auto;
       padding: 32px 24px;
+      animation: hqFadeIn 0.35s ease both;
     }
     .stats-row {
       display: flex;
@@ -36,7 +37,15 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       border-radius: 12px;
       padding: 20px;
       min-width: 0;
+      animation: hqFadeInUp 0.4s ease both;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
+    .stat-card:hover {
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
+      transform: translateY(-2px);
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.05s; }
+    .stat-card:nth-child(2) { animation-delay: 0.12s; }
     .stat-card .stat-value {
       font-size: 28px;
       font-weight: 700;
@@ -52,6 +61,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       justify-content: space-between;
       align-items: center;
       margin-bottom: 24px;
+      animation: hqFadeInUp 0.4s ease 0.18s both;
     }
     .dashboard-header h2 {
       font-size: 22px;
@@ -59,6 +69,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       color: #111827;
       margin: 0;
     }
+    .temas-list { animation: hqFadeInUp 0.4s ease 0.24s both; }
     .tema-card {
       background: #ffffff;
       border: 1px solid #e5e7eb;
@@ -66,7 +77,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       padding: 20px;
       margin-bottom: 12px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -76,6 +87,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     .tema-card:hover {
       border-color: #6366f1;
       background: #eef2ff;
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
     }
     .tema-card .tema-info {
       min-width: 0;
@@ -107,6 +120,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     .empty-state {
       text-align: center;
       padding: 48px 0;
+      animation: hqFadeInUp 0.4s ease 0.22s both;
     }
     .empty-state i {
       font-size: 48px;
@@ -140,6 +154,10 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     /* ---- Mobile FAB + cards edge-to-edge ---- */
     .fab {
       display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      z-index: 50;
     }
     .desktop-new-btn { display: inline-flex; }
 
@@ -163,13 +181,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       }
       .dashboard-header h2 { font-size: 18px; }
       .desktop-new-btn { display: none; }
-      .fab {
-        display: flex;
-        position: fixed;
-        bottom: 24px;
-        right: 20px;
-        z-index: 50;
-      }
+      .fab { display: flex; }
       .tema-card {
         border-radius: 0;
         border-left: none;
