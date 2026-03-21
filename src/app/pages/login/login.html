@@ -1,10 +1,19 @@
 <div class="login-page">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
   <div class="login-card">
+    <div class="login-logo">
+      <i class="pi pi-eye-slash"></i>
+    </div>
+
     <div class="login-title">hidden-questions</div>
     <div class="login-subtitle">Faça login para gerenciar seus temas</div>
 
     @if (erro()) {
-      <p-message severity="error" [text]="erro()" class="w-full" />
+      <div class="erro-wrapper">
+        <p-message severity="error" [text]="erro()" class="w-full" />
+      </div>
       <div class="spacer"></div>
     }
 
@@ -13,11 +22,13 @@
       <input type="text" pInputText class="w-full" placeholder="Seu nome de admin" [(ngModel)]="nome" />
     </div>
 
-    <div class="login-field">
+    <div class="login-field login-field-senha">
       <label>Senha</label>
       <p-password class="w-full" [toggleMask]="true" [feedback]="false" [(ngModel)]="senha" placeholder="Sua senha" [fluid]="true" (keyup.enter)="entrar()" />
     </div>
 
-    <p-button label="Entrar" class="w-full" [fluid]="true" icon="pi pi-sign-in" (click)="entrar()" [loading]="carregando()" />
+    <div class="login-btn-wrapper">
+      <p-button label="Entrar" class="w-full" [fluid]="true" icon="pi pi-sign-in" (click)="entrar()" [loading]="carregando()" />
+    </div>
   </div>
 </div>
