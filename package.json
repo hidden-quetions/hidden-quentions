@@ -6,7 +6,7 @@
     "start": "ng serve",
     "api": "json-server --watch db.json --port 3000",
     "build": "ng build",
-    "build:ghpages": "ng build --base-href /hidden-questions/ && cp dist/hidden-questions/browser/index.html dist/hidden-questions/browser/404.html && touch dist/hidden-questions/browser/.nojekyll",
+    "build:ghpages": "ng build --base-href /hidden-questions/ && touch dist/hidden-questions/browser/.nojekyll",
     "deploy": "npm run build:ghpages && npx angular-cli-ghpages --dir=dist/hidden-questions/browser --no-silent",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
