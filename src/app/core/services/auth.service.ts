@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { JsonbinService } from './jsonbin.service';
 
 export interface Admin {
   id: string;
@@ -7,36 +8,22 @@ export interface Admin {
   senha: string;
 }
 
-const ADMINS_KEY = 'hq_admins';
 const ADMIN_KEY = 'hq_admin';
-
-const DEFAULT_ADMINS: Admin[] = [
-  { id: '1', nome: 'admin', senha: 'admin123' }
-];
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor() {
-    if (!localStorage.getItem(ADMINS_KEY)) {
-      localStorage.setItem(ADMINS_KEY, JSON.stringify(DEFAULT_ADMINS));
-    }
-  }
-
-  private getAdmins(): Admin[] {
-    return JSON.parse(localStorage.getItem(ADMINS_KEY) || '[]');
-  }
-
-  private saveAdmins(admins: Admin[]): void {
-    localStorage.setItem(ADMINS_KEY, JSON.stringify(admins));
-  }
+  private jsonbin = inject(JsonbinService);
 
   login(nome: string, senha: string): Observable<Admin | null> {
-    const admins = this.getAdmins();
-    const found = admins.find(a => a.nome === nome && a.senha === senha) || null;
-    if (found) {
-      localStorage.setItem(ADMIN_KEY, JSON.stringify(found));
-    }
-    return of(found);
+    return this.jsonbin.getData().pipe(
+      map(data => {
+        const found = data.admins.find(a => a.nome === nome && a.senha === senha) || null;
+        if (found) {
+          localStorage.setItem(ADMIN_KEY, JSON.stringify(found));
+        }
+        return found;
+      })
+    );
   }
 
   logout(): void {
@@ -52,13 +39,7 @@ export class AuthService {
     return !!this.getAdmin();
   }
 
-  updateStored(admin: Admin): void {
+  setSessionAdmin(admin: Admin): void {
     localStorage.setItem(ADMIN_KEY, JSON.stringify(admin));
-    const admins = this.getAdmins();
-    const idx = admins.findIndex(a => a.id === admin.id);
-    if (idx >= 0) {
-      admins[idx] = admin;
-      this.saveAdmins(admins);
-    }
   }
 }

@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, switchMap, map } from 'rxjs';
+import { JsonbinService } from './jsonbin.service';
 
 export interface Pergunta {
   id: string;
@@ -8,31 +9,25 @@ export interface Pergunta {
   criadoEm: string;
 }
 
-const PERGUNTAS_KEY = 'hq_perguntas';
-
 @Injectable({ providedIn: 'root' })
 export class PerguntaService {
-  private getPerguntas(): Pergunta[] {
-    return JSON.parse(localStorage.getItem(PERGUNTAS_KEY) || '[]');
-  }
-
-  private savePerguntas(perguntas: Pergunta[]): void {
-    localStorage.setItem(PERGUNTAS_KEY, JSON.stringify(perguntas));
-  }
+  private jsonbin = inject(JsonbinService);
 
   private generateId(): string {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
   }
 
   getByTema(temaId: string): Observable<Pergunta[]> {
-    return of(this.getPerguntas().filter(p => p.temaId === temaId));
+    return this.jsonbin.getData().pipe(map(data => data.perguntas.filter(p => p.temaId === temaId)));
   }
 
   create(pergunta: Omit<Pergunta, 'id'>): Observable<Pergunta> {
-    const perguntas = this.getPerguntas();
-    const nova: Pergunta = { ...pergunta, id: this.generateId() };
-    perguntas.push(nova);
-    this.savePerguntas(perguntas);
-    return of(nova);
+    return this.jsonbin.getData().pipe(
+      switchMap(data => {
+        const nova: Pergunta = { ...pergunta, id: this.generateId() };
+        data.perguntas.push(nova);
+        return this.jsonbin.saveData(data).pipe(map(() => nova));
+      })
+    );
   }
 }

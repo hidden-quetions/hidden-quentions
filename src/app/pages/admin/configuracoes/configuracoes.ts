@@ -105,7 +105,6 @@ export class ConfiguracoesComponent {
     if (!this.novoNome.trim()) return;
 
     this.adminService.update(this.admin.id, { nome: this.novoNome }).subscribe(updated => {
-      this.authService.updateStored(updated);
       this.admin = updated;
       this.msgNome.set('Nome atualizado com sucesso!');
       setTimeout(() => this.msgNome.set(''), 3000);
@@ -126,7 +125,6 @@ export class ConfiguracoesComponent {
     }
 
     this.adminService.update(this.admin.id, { senha: this.novaSenha }).subscribe(updated => {
-      this.authService.updateStored(updated);
       this.admin = updated;
       this.novaSenha = '';
       this.confirmarSenha = '';
