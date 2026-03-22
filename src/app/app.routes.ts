@@ -8,6 +8,5 @@ export const routes: Routes = [
   { path: 'admin/configuracoes', loadComponent: () => import('./pages/admin/configuracoes/configuracoes').then(m => m.ConfiguracoesComponent), canActivate: [authGuard] },
   { path: 'admin/tema/:id', loadComponent: () => import('./pages/admin/tema-detalhe/tema-detalhe').then(m => m.TemaDetalheComponent), canActivate: [authGuard] },
   { path: 't/:slug', loadComponent: () => import('./pages/tema-publico/tema-publico').then(m => m.TemaPublicoComponent) },
-  { path: 'mockup', loadComponent: () => import('./pages/mockup/mockup').then(m => m.MockupComponent) },
-  { path: '**', redirectTo: 'login' }
+{ path: '**', redirectTo: 'login' }
 ];

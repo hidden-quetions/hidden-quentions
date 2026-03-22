@@ -23,7 +23,7 @@ export class TemaService {
   }
 
   private generateId(): string {
-    return Math.random().toString(36).substring(2, 6);
+    return Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
   }
 
   getAll(): Observable<Tema[]> {
