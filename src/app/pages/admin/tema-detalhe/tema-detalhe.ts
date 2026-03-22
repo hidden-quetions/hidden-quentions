@@ -223,14 +223,18 @@ export class TemaDetalheComponent implements OnInit {
     });
   }
 
+  private get baseUrl(): string {
+    return document.baseURI.replace(/\/$/, '');
+  }
+
   copiarLink() {
-    const link = `${window.location.origin}/t/${this.tema()?.slug}`;
+    const link = `${this.baseUrl}/t/${this.tema()?.slug}`;
     navigator.clipboard.writeText(link);
     this.linkCopiado.set(true);
     setTimeout(() => this.linkCopiado.set(false), 2000);
   }
 
   get link(): string {
-    return `${window.location.origin}/t/${this.tema()?.slug}`;
+    return `${this.baseUrl}/t/${this.tema()?.slug}`;
   }
 }
